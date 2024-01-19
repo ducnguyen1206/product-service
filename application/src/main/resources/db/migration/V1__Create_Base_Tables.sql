@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS tbl_product(
     id bigserial NOT NULL PRIMARY KEY,
     product_name varchar(255) NOT NULL,
-    price NUMERIC(7,5) NOT NULL,
+    price NUMERIC NOT NULL,
+    currency varchar(255) NOT NULL,
     category_id int8 NOT NULL,
     default_quantity int4 NOT NULL,
     description varchar(255),
