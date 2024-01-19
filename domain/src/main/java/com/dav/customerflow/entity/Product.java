@@ -26,9 +26,14 @@ public class Product extends BaseEntity {
     @NotNull(message = "Price is required")
     private BigDecimal price;
 
+    @NotBlank(message = "Currency is required")
+    private String currency;
+
     @NotNull(message = "Category Id is required")
     private Long categoryId;
 
     @NotNull(message = "Default quantity Id is required")
     private Integer defaultQuantity;
+
+    private String description;
 }

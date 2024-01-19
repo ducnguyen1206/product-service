@@ -26,11 +26,17 @@ public class ProductDto {
     @NotNull(message = "Category Name is required")
     private String categoryName;
 
+    @Schema(required = true, example = "VND")
+    @NotNull(message = "Currency is required")
+    private String currency;
+
     @Schema(required = true)
     @NotNull(message = "Default quantity Id is required")
     private Integer defaultQuantity;
 
-    @Schema(required = true, example = "Sushi Tuyenbeoo Saigon")
-    @NotNull(message = "Branch Name is required")
-    private String branchName;
+    @Schema(required = true, example = "501")
+    private int branchCode;
+
+    @Schema(example = "1 roll (4 pieces)")
+    private String description;
 }

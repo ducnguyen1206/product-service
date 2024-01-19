@@ -1,9 +1,6 @@
 package com.dav.customerflow.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,6 +12,7 @@ import static com.dav.customerflow.constant.DatabaseConstant.TBL_PRODUCT_BRANCH;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = TBL_PRODUCT_BRANCH)
