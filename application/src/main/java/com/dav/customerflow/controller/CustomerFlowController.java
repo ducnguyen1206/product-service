@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import static com.dav.customerflow.constant.HeaderConstant.REQUEST_JWT;
 import static com.dav.customerflow.constant.UrlConstant.*;
@@ -27,7 +28,7 @@ public class CustomerFlowController {
 
     @PostMapping(value = SAVE_PRODUCT)
     @Operation(summary = "Get product(s) details")
-    public ResponseEntity<Object> saveProductDetails(@RequestBody ProductDto productDto) {
+    public ResponseEntity<Object> saveProductDetails(@Valid @RequestBody ProductDto productDto) {
         String user = SecurityUtils.getUser(requestHeader.getHeader(REQUEST_JWT));
         customerFlowService.save(productDto, user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
