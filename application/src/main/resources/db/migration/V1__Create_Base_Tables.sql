@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS tbl_branch(
     name varchar(255) NOT NULL,
     address varchar(255) NOT NULL,
     status varchar(255) NOT NULL,
+    branch_code int4 NOT NULL,
     created_date timestamp NOT NULL,
     created_by varchar(255) NOT NULL,
     last_updated_date timestamp,
