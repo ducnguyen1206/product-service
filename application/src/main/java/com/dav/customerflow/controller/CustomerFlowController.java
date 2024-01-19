@@ -2,6 +2,7 @@ package com.dav.customerflow.controller;
 
 import com.dav.customerflow.dto.ProductDto;
 import com.dav.customerflow.service.CustomerFlowService;
+import com.dav.customerflow.utils.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,10 +28,8 @@ public class CustomerFlowController {
     @PostMapping(value = SAVE_PRODUCT)
     @Operation(summary = "Get product(s) details")
     public ResponseEntity<Object> saveProductDetails(@RequestBody ProductDto productDto) {
-        String jwt = requestHeader.getHeader(REQUEST_JWT);
-        // TODO extract JWT
-
-        customerFlowService.save(productDto, jwt);
+        String user = SecurityUtils.getUser(requestHeader.getHeader(REQUEST_JWT));
+        customerFlowService.save(productDto, user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
