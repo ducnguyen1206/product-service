@@ -23,6 +23,7 @@ public class CustomerFlowDataImpl implements CustomerFlowData {
     @Autowired
     private BranchRepository branchRepository;
 
+    @Autowired
     private ProductBranchRepository productBranchRepository;
 
     @Override
