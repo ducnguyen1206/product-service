@@ -39,4 +39,10 @@ public class ProductDto {
 
     @Schema(example = "1 roll (4 pieces)")
     private String description;
+
+    private String branchName;
+
+    private String address;
+
+    private Long categoryId;
 }

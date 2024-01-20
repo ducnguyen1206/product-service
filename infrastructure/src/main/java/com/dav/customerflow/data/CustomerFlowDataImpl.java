@@ -10,6 +10,7 @@ import com.dav.customerflow.repository.ProductBranchRepository;
 import com.dav.customerflow.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CustomerFlowDataImpl implements CustomerFlowData {
@@ -50,5 +51,26 @@ public class CustomerFlowDataImpl implements CustomerFlowData {
     @Override
     public void saveProductBranch(ProductBranch productBranch) {
         productBranchRepository.save(productBranch);
+    }
+
+    @Override
+    public List<Category> getAllCategory() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public Category getCategoryByCategoryId(Long categoryId) {
+        Optional<Category> category = categoryRepository.findById(categoryId);
+        return category.orElse(null);
+    }
+
+    @Override
+    public List<Product> getProductByCategoryId(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 }
