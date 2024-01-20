@@ -3,7 +3,8 @@ VALUES
 ('Sushi', '2024-01-19 00:00:00.00', 'System', '2024-01-19 00:00:00.00', 'System'),
 ('Sashimi', '2024-01-19 00:00:00.00', 'System', '2024-01-19 00:00:00.00', 'System'),
 ('Ramen', '2024-01-19 00:00:00.00', 'System', '2024-01-19 00:00:00.00', 'System'),
-('Curry', '2024-01-19 00:00:00.00', 'System', '2024-01-19 00:00:00.00', 'System');
+('Curry', '2024-01-19 00:00:00.00', 'System', '2024-01-19 00:00:00.00', 'System'),
+('Other', '2024-01-19 00:00:00.00', 'System', '2024-01-19 00:00:00.00', 'System');
 
 INSERT INTO tbl_branch ("name", address, status, branch_code, created_date, created_by, last_updated_date, last_updated_by) 
 VALUES 
