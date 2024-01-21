@@ -2,8 +2,10 @@ package com.dav.customerflow.mapper;
 
 import com.dav.customerflow.dto.CategoryDto;
 import com.dav.customerflow.dto.ProductDto;
+import com.dav.customerflow.dto.ReservationDto;
 import com.dav.customerflow.entity.Category;
 import com.dav.customerflow.entity.Product;
+import com.dav.customerflow.entity.Reservation;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -22,4 +24,6 @@ public interface EntityMapper {
     CategoryDto categoryToCategoryDto(Category category);
 
     List<CategoryDto> categoryListToCategoryDtoList(List<Category> categories);
+
+    Reservation reservationDtoToReservation(ReservationDto reservationDto);
 }

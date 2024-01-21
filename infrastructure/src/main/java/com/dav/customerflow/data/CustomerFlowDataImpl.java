@@ -1,13 +1,7 @@
 package com.dav.customerflow.data;
 
-import com.dav.customerflow.entity.Branch;
-import com.dav.customerflow.entity.Category;
-import com.dav.customerflow.entity.Product;
-import com.dav.customerflow.entity.ProductBranch;
-import com.dav.customerflow.repository.BranchRepository;
-import com.dav.customerflow.repository.CategoryRepository;
-import com.dav.customerflow.repository.ProductBranchRepository;
-import com.dav.customerflow.repository.ProductRepository;
+import com.dav.customerflow.entity.*;
+import com.dav.customerflow.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -26,6 +20,9 @@ public class CustomerFlowDataImpl implements CustomerFlowData {
 
     @Autowired
     private ProductBranchRepository productBranchRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @Override
     public Product save(Product product) {
@@ -46,6 +43,11 @@ public class CustomerFlowDataImpl implements CustomerFlowData {
     @Override
     public Branch getBranchByBranchCode(int branchCode) {
         return branchRepository.findByBranchCode(branchCode).orElse(null);
+    }
+
+    @Override
+    public Branch findBranchByBranchId(Long branchId) {
+        return branchRepository.findById(branchId).orElse(null);
     }
 
     @Override
@@ -72,5 +74,10 @@ public class CustomerFlowDataImpl implements CustomerFlowData {
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public Reservation saveReservation(Reservation reservation) {
+        return reservationRepository.save(reservation);
     }
 }

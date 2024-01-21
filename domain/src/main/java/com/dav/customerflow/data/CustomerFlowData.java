@@ -1,9 +1,6 @@
 package com.dav.customerflow.data;
 
-import com.dav.customerflow.entity.Branch;
-import com.dav.customerflow.entity.Category;
-import com.dav.customerflow.entity.Product;
-import com.dav.customerflow.entity.ProductBranch;
+import com.dav.customerflow.entity.*;
 
 import java.util.List;
 
@@ -16,6 +13,8 @@ public interface CustomerFlowData {
 
     Branch getBranchByBranchCode(int branchCode);
 
+    Branch findBranchByBranchId(Long branchId);
+
     void saveProductBranch(ProductBranch productBranch);
 
     List<Category> getAllCategory();
@@ -25,4 +24,6 @@ public interface CustomerFlowData {
     List<Product> getProductByCategoryId(Long categoryId);
 
     List<Product> getAllProducts();
+
+    Reservation saveReservation(Reservation reservation);
 }

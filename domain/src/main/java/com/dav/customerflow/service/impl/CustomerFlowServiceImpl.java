@@ -3,10 +3,8 @@ package com.dav.customerflow.service.impl;
 import com.dav.customerflow.data.CustomerFlowData;
 import com.dav.customerflow.dto.CategoryDto;
 import com.dav.customerflow.dto.ProductDto;
-import com.dav.customerflow.entity.Branch;
-import com.dav.customerflow.entity.Category;
-import com.dav.customerflow.entity.Product;
-import com.dav.customerflow.entity.ProductBranch;
+import com.dav.customerflow.dto.ReservationDto;
+import com.dav.customerflow.entity.*;
 import com.dav.customerflow.enumf.StatusEnum;
 import com.dav.customerflow.mapper.EntityMapper;
 import com.dav.customerflow.service.CustomerFlowService;
@@ -101,6 +99,26 @@ public class CustomerFlowServiceImpl implements CustomerFlowService {
 
         log.info("Get all products");
         return EntityMapper.INSTANCE.productListToProductDtoList(customerFlowData.getAllProducts());
+    }
+
+    @Override
+    public void submitReservation(ReservationDto request, String user) {
+        // check branch
+        Long branchId = request.getBranchId();
+        Branch branch = customerFlowData.findBranchByBranchId(branchId);
+        if (Objects.isNull(branch)) {
+            // TODO handle 404 exception here
+            log.error("Branch not found");
+            return;
+        }
+
+        // save to reservation table
+        Reservation reservation = EntityMapper.INSTANCE.reservationDtoToReservation(request);
+        reservation.setStatus(StatusEnum.ACTIVE.name());
+        log.info("Reservation info: {}", toJsonString(reservation));
+        customerFlowData.saveReservation(reservation);
+
+        // TODO send notification
     }
 
     private CategoryDto getCategoryByName(String categoryName) {
