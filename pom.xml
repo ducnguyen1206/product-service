@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.4</version>
+		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<modules>
@@ -20,11 +20,13 @@
 	<name>ms-customer-flow</name>
 	<description>Sushi Tuyenbeoo customer flow</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<feign.version>3.1.4</feign.version>
 		<githubFeign.version>12.1</githubFeign.version>
 		<swagger.version>3.0.0</swagger.version>
 		<mapstruct.version>1.5.3.Final</mapstruct.version>
+		<kafka.version>3.0.0</kafka.version>
+		<lombok1.version>1.18.28</lombok1.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -57,7 +59,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<scope>provided</scope>
+			<version>${lombok1.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -80,23 +83,6 @@
 			<artifactId>feign-httpclient</artifactId>
 			<version>${githubFeign.version}</version>
 		</dependency>
-		<!--springfox dependencies for api documentations in swagger -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
 		<dependency>
 			<groupId>jakarta.transaction</groupId>
 			<artifactId>jakarta.transaction-api</artifactId>
@@ -113,6 +99,16 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.3.0</version>
 		</dependency>
 	</dependencies>
 
@@ -145,7 +141,7 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.16</version>
+							<version>${lombok1.version}</version>
 						</path>
 						<path>
 							<groupId>org.projectlombok</groupId>

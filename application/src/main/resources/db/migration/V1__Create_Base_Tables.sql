@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS tbl_reservation(
     phone_no varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     reservation_date timestamp NOT NULL,
-    guest_no varchar(255) NOT NULL,
+    guest_no int4 NOT NULL,
     branch_id int8 NOT NULL,
     user_id int8 NULL,
     notes varchar(255) NULL,

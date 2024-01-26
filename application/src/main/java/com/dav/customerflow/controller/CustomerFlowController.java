@@ -6,13 +6,13 @@ import com.dav.customerflow.dto.ReservationDto;
 import com.dav.customerflow.service.CustomerFlowService;
 import com.dav.customerflow.utils.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.List;
 
 import static com.dav.customerflow.constant.HeaderConstant.REQUEST_JWT;
@@ -48,4 +48,5 @@ public class CustomerFlowController {
         customerFlowService.submitReservation(request, user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 }

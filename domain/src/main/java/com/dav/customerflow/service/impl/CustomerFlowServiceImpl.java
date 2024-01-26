@@ -11,6 +11,7 @@ import com.dav.customerflow.service.CustomerFlowService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +26,9 @@ public class CustomerFlowServiceImpl implements CustomerFlowService {
 
     @Autowired
     private final CustomerFlowData customerFlowData;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
     public void save(ProductDto productRequest, String createdBy) {
