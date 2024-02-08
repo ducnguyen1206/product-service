@@ -6,11 +6,13 @@ import com.dav.customerflow.dto.ProductDto;
 import com.dav.customerflow.dto.ReservationDto;
 import com.dav.customerflow.entity.*;
 import com.dav.customerflow.enumf.StatusEnum;
+import com.dav.customerflow.exception.GenericException;
 import com.dav.customerflow.mapper.EntityMapper;
 import com.dav.customerflow.service.CustomerFlowService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.Collections;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.dav.customerflow.constant.MessageConstant.CATEGORY_RETURN_LOG;
+import static com.dav.customerflow.dto.error.ErrorEnum.*;
 import static com.dav.customerflow.utils.CommonUtils.toJsonString;
 
 @AllArgsConstructor
@@ -37,9 +40,8 @@ public class CustomerFlowServiceImpl implements CustomerFlowService {
         // Get categoryId
         CategoryDto category = getCategoryByName(productRequest.getCategoryName());
         if (Objects.isNull(category)) {
-            log.error("Failed to get category");
-            //TODO handle exception here 404
-            return;
+            log.error( CATEGORY_NOT_FOUND.getMessage());
+            throw new GenericException(CATEGORY_NOT_FOUND.getCode(), CATEGORY_NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND);
         }
 
         log.info(CATEGORY_RETURN_LOG, toJsonString(category));
@@ -47,9 +49,8 @@ public class CustomerFlowServiceImpl implements CustomerFlowService {
         // Get branchId
         Branch branch = customerFlowData.getBranchByBranchCode(productRequest.getBranchCode());
         if (Objects.isNull(branch)) {
-            log.error("Failed to get branch");
-            //TODO handle exception here 404
-            return;
+            log.error(BRANCH_NOT_FOUND.getMessage());
+            throw new GenericException(BRANCH_NOT_FOUND.getCode(), BRANCH_NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND);
         }
 
         log.info("Branch returned {}", toJsonString(branch));
@@ -60,8 +61,7 @@ public class CustomerFlowServiceImpl implements CustomerFlowService {
         // Validating product name
         if (customerFlowData.existsByProductName(productRequest.getProductName())) {
             log.error("Product name already existed");
-            // TODO handle exception 409
-            return;
+            throw new GenericException(PRODUCT_NAME_EXISTED.getCode(), PRODUCT_NAME_EXISTED.getMessage(), HttpStatus.CONFLICT);
         }
 
         Product product = EntityMapper.INSTANCE.productDtoToProduct(productRequest);
@@ -111,9 +111,8 @@ public class CustomerFlowServiceImpl implements CustomerFlowService {
         Long branchId = request.getBranchId();
         Branch branch = customerFlowData.findBranchByBranchId(branchId);
         if (Objects.isNull(branch)) {
-            // TODO handle 404 exception here
             log.error("Branch not found");
-            return;
+            throw new GenericException(BRANCH_NOT_FOUND.getCode(), BRANCH_NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND);
         }
 
         // save to reservation table
