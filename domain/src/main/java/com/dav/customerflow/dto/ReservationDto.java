@@ -2,6 +2,7 @@ package com.dav.customerflow.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -21,7 +22,7 @@ import static com.dav.customerflow.constant.CommonConstant.DEFAULT_DATETIME_FORM
 public class ReservationDto {
     @NotBlank(message = "Customer name is required")
     @Schema(required = true, example = "David John")
-
+    @Pattern(regexp = "^([^0-9]*)$", message = "Invalid name format")
     private String customerName;
 
     @NotBlank(message = "Phone number is required")
@@ -34,8 +35,9 @@ public class ReservationDto {
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
     private String email;
 
-    @NotNull(message = "Number of guests is required")
+    @NotNull(message = "guestNo date is required")
     @Schema(required = true, example = "1")
+    @Min(value = 1, message = "There must be at least 1 guest for the reservation")
     private Integer guestNo;
 
     @JsonFormat(pattern = DEFAULT_DATETIME_FORMAT)
