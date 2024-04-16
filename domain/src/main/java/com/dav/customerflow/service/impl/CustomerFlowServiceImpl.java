@@ -31,7 +31,7 @@ public class CustomerFlowServiceImpl implements CustomerFlowService {
     private final CustomerFlowData customerFlowData;
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
     public void save(ProductDto productRequest, String createdBy) {
