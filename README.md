@@ -1,2 +1,2 @@
 # ms-customer-flow
-Handle bussiness logic for sushi Tuyenbeoo restaurant
+Handle business logic for restaurant
